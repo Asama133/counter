@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>task-2</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+    }
+
+    h2 {
+      font-weight: bolder;
+      font-size: 30px;
+    }
+    .counter {
+      font-size: 40px;
+      font-weight: bolder;
+    }
+    button {
+      margin: 30px;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      background-color: blueviolet;
+      border: none;
+      outline: none;
+      position: relative;
+      transform: rotateX(40deg);
+      box-shadow: 0 15px gray;
+      letter-spacing: 3px;
+      color: aliceblue;
+      transition: 0.5ms;
+    }
+    button:hover {
+      background-color: black;
+    }
+
+    .active {
+      box-shadow: 0 7px lightgray;
+      transform: rotateX(0deg);
+    }
+  </style>
+  <body>
+    <h2>counter</h2>
+    <div class="counter">0</div>
+    <div>
+      <button class="decrease">decrease</button>
+      <button class="reset">reset</button>
+      <button class="increase">increase</button>
+    </div>
+  </body>
+  <script>
+    let counterDiv = document.querySelector(".counter");
+    let buttons = document.querySelectorAll("button");
+    let count = 0;
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        buttons.forEach((btn) => {
+          btn.classList.remove("active");
+        });
+        e.target.classList.add("active");
+        if (e.target.classList.contains("decrease")) {
+          counterDiv.textContent--;
+          changeColor();
+        } else if (e.target.classList.contains("increase")) {
+          counterDiv.textContent++;
+          changeColor();
+        } else {
+          counterDiv.textContent = count;
+          changeColor();
+        }
+      });
+      btn.addEventListener("mouseleave", () => {
+        buttons.forEach((btn) => {
+          btn.classList.remove("active");
+        });
+      });
+    });
+
+    function changeColor() {
+      if (counterDiv.textContent > 0) counterDiv.style.color = "green";
+      else if (counterDiv.textContent < 0) counterDiv.style.color = "red";
+      else {
+        counterDiv.style.color = "black";
+      }
+    }
+
+
+  </script>
+</html>
